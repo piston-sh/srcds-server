@@ -1,0 +1,17 @@
+build-dedicated-server:
+    context: sourceforts-server
+    working_directory: /sourceforts-server
+    docker:
+      - image: docker
+        environment:
+          STEAM_USERNAME: $STEAM_USERNAME
+          STEAM_PASSWORD: $STEAM_PASSWORD
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          command: |
+            docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:debian-$CIRCLE_BUILD_NUM -t sourceforts/dedicated-server:latest .
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+            docker push sourceforts/dedicated-server:debian-$CIRCLE_BUILD_NUM
+            docker push sourceforts/dedicated-server:latest
