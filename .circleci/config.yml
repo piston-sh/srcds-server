@@ -3,7 +3,6 @@ version: 2
 
 jobs:
     build:
-        context: sourceforts-server
         working_directory: /sourceforts-server
         docker:
           - image: docker
@@ -21,3 +20,10 @@ jobs:
                 echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
                 docker push sourceforts/dedicated-server:debian-$CIRCLE_BUILD_NUM
                 docker push sourceforts/dedicated-server:latest
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build:
+          context: sourceforts-server
