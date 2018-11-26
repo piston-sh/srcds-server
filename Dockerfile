@@ -16,6 +16,9 @@ RUN steamcmd.sh +login $steam_username $steam_password \
 ENV HOSTNAME="docker-dedicated-server"
 ENV SRCDS_FPSMAX=300 SRCDS_TICKRATE=128 SRCDS_PORT=27015 SRCDS_TV_PORT=27020 SRCDS_MAXPLAYERS=20 SRCDS_TOKEN=0 SRCDS_RCONPW="changeme" SRCDS_PW="changeme"
 
+ENV SRCDS_AUTOUPDATE=$SOURCE_HOME_DIR/autoupdate.txt
+COPY autoupdate.txt $SRCDS_AUTOUPDATE
+
 # Expose ports
 EXPOSE 27005/udp
 EXPOSE 27015/tcp
