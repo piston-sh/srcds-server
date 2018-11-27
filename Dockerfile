@@ -24,7 +24,7 @@ ENV SRCDS_RCONPW="changeme"
 ENV SRCDS_PW="changeme"
 
 ENV SRCDS_AUTOUPDATE=$SOURCE_HOME_DIR/autoupdate.txt
-COPY autoupdate.txt $SRCDS_AUTOUPDATE
+COPY --chown=steam:steam autoupdate.txt $SRCDS_AUTOUPDATE
 
 # Expose ports
 EXPOSE 27005/udp
