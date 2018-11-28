@@ -16,8 +16,8 @@ deploy:
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
-  - ./send.sh success https://discordapp.com/api/webhooks/517358922873700352/cr40fi6gMrlRBsXRJQAIwOlesJUGORiaRIcZ58lLadlyq_QiZI0yAT0UhWLw63lWQq6C
+  - ./send.sh success $DISCORD_WEBHOOK_URL
 after_failure:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
-  - ./send.sh failure https://discordapp.com/api/webhooks/517358922873700352/cr40fi6gMrlRBsXRJQAIwOlesJUGORiaRIcZ58lLadlyq_QiZI0yAT0UhWLw63lWQq6C
+  - ./send.sh failure $DISCORD_WEBHOOK_URL
