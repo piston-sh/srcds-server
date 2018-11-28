@@ -16,6 +16,33 @@ ENV SRCDS_PW="changeme"
 ENV SRCDS_AUTOUPDATE=$SOURCE_HOME_DIR/autoupdate.txt
 COPY --chown=steam:steam autoupdate.txt $SRCDS_AUTOUPDATE
 
+# We need access to i386 arch 32-bit binaries required by srcds_run
+USER root
+COPY debian/sources.list /etc/apt/sources.list
+RUN dpkg --add-architecture i386
+
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    lib32tinfo5 \
+    lib32ncurses5 \
+    libssl1.0.0:i386 \
+    lib32stdc++6 \
+    libcurl4-gnutls-dev:i386 \
+    libldap-2.4-2:i386 \
+    lib32z1 \
+    gcc-multilib \
+    g++-multilib \
+    gdb \
+    apt-get -y upgrade && \
+    apt-get clean autoclean && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}/
+USER steam
+
+# Linking libs n ting
+RUN ln -s $STEAMCMD_DIR/linux32 $STEAM_HOME_DIR/.steam/sdk32
+ENV LD_LIBRARY_PATH=$STEAMCMD_DIR/linux32:$LD_LIBRARY_PATH
+
 # Expose ports
 EXPOSE 27005/udp
 EXPOSE 27015/tcp
