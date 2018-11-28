@@ -16,6 +16,15 @@ ENV SRCDS_PW="changeme"
 ENV SRCDS_AUTOUPDATE=$SOURCE_HOME_DIR/autoupdate.txt
 COPY --chown=steam:steam autoupdate.txt $SRCDS_AUTOUPDATE
 
+# Run Steamcmd and install dependencies
+# - 244310      Source SDK Base 2013 Dedicated Server
+# - 243750      Source SDK Base 2013 Multiplayer
+RUN steamcmd.sh +login $steam_username $steam_password \
+        +force_install_dir $STEAM_HOME_DIR \
+        +app_update 244310 validate \
+        +app_update 243750 validate \
+        +quit
+
 # We need access to i386 arch 32-bit binaries required by srcds_run
 USER root
 COPY debian/sources.list /etc/apt/sources.list
