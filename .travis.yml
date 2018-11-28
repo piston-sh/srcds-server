@@ -10,8 +10,8 @@ before_deploy:
 deploy:
   provider: script
   script: |
-    docker push sourceforts/dedicated-server:debian-$TRAVIS_BUILD_NUMBER &&
-    docker push sourceforts/dedicated-server:debian &&
+    docker push sourceforts/dedicated-server:debian-$TRAVIS_BUILD_NUMBER && 
+    docker push sourceforts/dedicated-server:debian && 
     docker push sourceforts/dedicated-server:latest
   on:
     branch: master
