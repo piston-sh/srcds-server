@@ -4,15 +4,6 @@ LABEL maintainer="admin@deniscraig.com"
 ARG steam_username 
 ARG steam_password
 
-# Run Steamcmd and install dependencies
-# - 244310      Source SDK Base 2013 Dedicated Server
-# - 243750      Source SDK Base 2013 Multiplayer
-RUN steamcmd.sh +login $steam_username $steam_password \
-        +force_install_dir $STEAM_HOME_DIR \
-        +app_update 244310 validate \
-        +app_update 243750 validate \
-        +quit
-
 ENV HOSTNAME="docker-dedicated-server"
 ENV SRCDS_FPSMAX=300
 ENV SRCDS_TICKRATE=128
