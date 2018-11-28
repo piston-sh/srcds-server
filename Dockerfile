@@ -42,9 +42,9 @@ RUN apt-get update && apt-get install -y \
     g++-multilib \
     libc6 \
     libc6-dev-i386 \
-    libopenal \
-    libfontconfig \
-    libfreetype \
+    libopenal1 \
+    libfontconfig1 \
+    libfreetype6 \
     gdb && \
     apt-get -y upgrade && \
     apt-get clean autoclean && \
