@@ -39,8 +39,9 @@ RUN apt-get update && apt-get install -y \
     libcurl4-gnutls-dev:i386 \
     libldap-2.4-2:i386 \
     lib32z1 \
-    gcc-multilib \
     g++-multilib \
+    libc6 \
+    libc6-dev-i386 \
     gdb && \
     apt-get -y upgrade && \
     apt-get clean autoclean && \
@@ -50,7 +51,7 @@ USER steam
 
 # Linking libs n ting
 RUN ln -s $STEAMCMD_DIR/linux32 $STEAM_HOME_DIR/.steam/sdk32
-ENV LD_LIBRARY_PATH=$STEAMCMD_DIR/linux32:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=$STEAM_HOME_DIR/bin:$STEAMCMD_DIR/linux32:/lib:/lib32:/lib64:/libx32
 
 # Expose ports
 EXPOSE 27005/udp
