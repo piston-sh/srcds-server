@@ -21,24 +21,6 @@ jobs:
                 docker push sourceforts/dedicated-server:debian-$CIRCLE_BUILD_NUM
                 docker push sourceforts/dedicated-server:debian
                 docker push sourceforts/dedicated-server:latest
-    build-gdb:
-        working_directory: /sourceforts-server
-        docker:
-          - image: docker
-            environment:
-              STEAM_USERNAME: $STEAM_USERNAME
-              STEAM_PASSWORD: $STEAM_PASSWORD
-        steps:
-          - setup_remote_docker
-          - attach_workspace:
-              at: /sourceforts-server
-          - checkout
-          - run:
-              command: |
-                docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:debian-gdb-$CIRCLE_BUILD_NUM -t sourceforts/dedicated-server:debian-gdb .
-                echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-                docker push sourceforts/dedicated-server:debian-gdb-$CIRCLE_BUILD_NUM
-                docker push sourceforts/dedicated-server:debian-gdb
     build-lite:
         working_directory: /sourceforts-server
         docker:
@@ -69,13 +51,6 @@ workflows:
           filters:
             branches:
               only: master
-  gdb:
-    jobs:
-      - build-gdb:
-          context: sourceforts-server
-          filters:
-            branches:
-              only: gdb
   lite:
     jobs:
       - build-lite:
