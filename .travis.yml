@@ -2,7 +2,7 @@ services:
   - docker
 
 script:
-  - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:debian-lite-$CIRCLE_BUILD_NUM -t sourceforts/dedicated-server:debian-lite -t sourceforts/dedicated-server:lite .
+  - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:debian-$TRAVIS_BUILD_NUMBER -t sourceforts/dedicated-server:debian -t sourceforts/dedicated-server:latest .
 
 before_deploy:
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
@@ -10,8 +10,8 @@ before_deploy:
 deploy:
   provider: script
   script: |
-    docker push sourceforts/dedicated-server:debian-lite-$CIRCLE_BUILD_NUM
-    docker push sourceforts/dedicated-server:debian-lite
-    docker push sourceforts/dedicated-server:lite
+    docker push sourceforts/dedicated-server:debian-$TRAVIS_BUILD_NUMBER &&
+    docker push sourceforts/dedicated-server:debian &&
+    docker push sourceforts/dedicated-server:latest
   on:
     branch: master
