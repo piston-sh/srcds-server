@@ -1,3 +1,7 @@
+notifications:
+  webhooks:
+    - https://discordapp.com/api/webhooks/517358922873700352/cr40fi6gMrlRBsXRJQAIwOlesJUGORiaRIcZ58lLadlyq_QiZI0yAT0UhWLw63lWQq6C
+
 services:
   - docker
 
@@ -6,15 +10,6 @@ script:
 
 before_deploy:
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-
-deploy:
-  provider: script
-  script:
-    - docker push sourceforts/dedicated-server:debian-$TRAVIS_BUILD_NUMBER
-    - docker push sourceforts/dedicated-server:debian
-    - docker push sourceforts/dedicated-server:latest
-  on:
-    branch: master
 
 deploy:
   provider: script
