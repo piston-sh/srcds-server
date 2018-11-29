@@ -40,7 +40,6 @@ RUN apt-get install -y --allow-unauthenticated \
     libcurl4-gnutls-dev:i386 \
     libldap-2.4-2:i386 \
     lib32z1 \
-    g++-multilib \
     libc6 \
     libc6-dev-i386 \
     libopenal1:i386 \
