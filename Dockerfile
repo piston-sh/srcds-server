@@ -1,4 +1,4 @@
-FROM sourceforts/steamcmd:debian
+FROM sourceforts/steamcmd
 LABEL maintainer="admin@deniscraig.com"
 
 ARG steam_username 
