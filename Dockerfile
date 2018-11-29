@@ -30,7 +30,9 @@ USER root
 COPY debian/sources.list /etc/apt/sources.list
 RUN dpkg --add-architecture i386
 
-RUN apt-get update && apt-get install -y --allow-unauthenticated \
+RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
+
+RUN apt-get install -y --allow-unauthenticated \
     software-properties-common \
     lib32tinfo5 \
     lib32ncurses5 \
@@ -47,11 +49,12 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
     libfreetype6:i386 \
     libxtables-dev:i386 \
     libatm1:i386 \
-    gdb && \
-    apt-get -y upgrade && \
-    apt-get clean autoclean && \
+    gdb
+    
+RUN apt-get clean autoclean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
+
 USER steam
 
 # Linking libs n ting
