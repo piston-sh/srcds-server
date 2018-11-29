@@ -20,14 +20,10 @@ COPY --chown=steam:steam autoupdate.txt $SRCDS_AUTOUPDATE
 # - 244310      Source SDK Base 2013 Dedicated Server
 # - 243750      Source SDK Base 2013 Multiplayer
 RUN steamcmd.sh +login $steam_username $steam_password \
-        +force_install_dir $STEAM_HOME_DIR \
+        +force_install_dir $STEAM_USER_DIR \
         +app_update 244310 validate \
         +app_update 243750 validate \
         +quit
-
-# Linking libs n ting
-RUN ln -s $STEAMCMD_DIR/linux32 $STEAM_HOME_DIR/.steam/sdk32
-ENV LD_LIBRARY_PATH=$STEAM_HOME_DIR/bin:$STEAMCMD_DIR/linux32:/lib:/lib32:/lib64:/libx32
 
 # Expose ports
 EXPOSE 27005/udp
@@ -37,4 +33,4 @@ EXPOSE 27020/udp
 EXPOSE 26900/udp
 EXPOSE 51840/udp
 
-WORKDIR $STEAM_HOME_DIR
+WORKDIR $STEAM_USER_DIR

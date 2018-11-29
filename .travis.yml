@@ -18,7 +18,6 @@ deploy:
   on:
     branch: master
 
-
 after_success:
   - ./.travisci/send.sh success $DISCORD_WEBHOOK_URL
 after_failure:
