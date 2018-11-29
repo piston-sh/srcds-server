@@ -5,12 +5,12 @@ script:
   - pushd ubuntu-trusty
   - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER .
   - docker tag sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:ubuntu-trusty
-  - docker tag sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:ubuntu
-  - docker tag sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:latest
   - popd
   - pushd ubuntu-xenial
   - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER .
   - docker tag sourceforts/dedicated-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:ubuntu-xenial
+  - docker tag sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:ubuntu
+  - docker tag sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:latest
   - popd
   - pushd debian-stretch
   - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:debian-stretch-$TRAVIS_BUILD_NUMBER .

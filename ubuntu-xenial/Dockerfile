@@ -25,38 +25,6 @@ RUN steamcmd.sh +login $steam_username $steam_password \
         +app_update 243750 validate \
         +quit
 
-# We need access to i386 arch 32-bit binaries required by srcds_run
-USER root
-COPY sources.list /etc/apt/sources.list
-RUN dpkg --add-architecture i386
-
-RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
-
-RUN apt-get install -y --allow-unauthenticated \
-    software-properties-common \
-    lib32tinfo5 \
-    lib32ncurses5 \
-    libssl1.0.0:i386 \
-    lib32stdc++6 \
-    libcurl4-gnutls-dev:i386 \
-    libldap-2.4-2:i386 \
-    lib32z1 \
-    g++-multilib \
-    libc6 \
-    libc6-dev-i386 \
-    libopenal1:i386 \
-    libfontconfig1:i386 \
-    libfreetype6:i386 \
-    libxtables10:i386 \
-    libatm1:i386 \
-    gdb
-    
-RUN apt-get clean autoclean && \
-    apt-get autoremove -y && \
-    rm -rf /var/lib/{apt,dpkg,cache,log}/
-
-USER steam
-
 # Linking libs n ting
 RUN ln -s $STEAMCMD_DIR/linux32 $STEAM_HOME_DIR/.steam/sdk32
 ENV LD_LIBRARY_PATH=$STEAM_HOME_DIR/bin:$STEAMCMD_DIR/linux32:/lib:/lib32:/lib64:/libx32
