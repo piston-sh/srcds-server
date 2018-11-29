@@ -2,23 +2,24 @@ services:
   - docker
 
 script:
-  - - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
   - pushd ubuntu-xenial
   - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER .
   - docker tag sourceforts/dedicated-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:ubuntu-xenial
   - docker tag sourceforts/dedicated-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:ubuntu
   - docker tag sourceforts/dedicated-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:latest
-  - docker push sourceforts/dedicated-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER
-  - docker push sourceforts/dedicated-server:ubuntu-xenial
-  - docker push sourceforts/dedicated-server:ubuntu
-  - docker push sourceforts/dedicated-server:latest
   - popd
 
+before_deploy:
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
+deploy:
+  provider: script
+  script: bash .travisci/deploy.sh
+  on:
+    branch: master
+
+
 after_success:
-  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
-  - chmod +x send.sh
-  - ./send.sh success $DISCORD_WEBHOOK_URL
+  - ./.travisci/send.sh success $DISCORD_WEBHOOK_URL
 after_failure:
-  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
-  - chmod +x send.sh
-  - ./send.sh failure $DISCORD_WEBHOOK_URL
+  - ./.travisci/send.sh failure $DISCORD_WEBHOOK_URL
