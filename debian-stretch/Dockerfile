@@ -1,4 +1,4 @@
-FROM sourceforts/steamcmd
+FROM sourceforts/steamcmd:debian-stretch
 LABEL maintainer="admin@deniscraig.com"
 
 ARG steam_username 
@@ -27,7 +27,7 @@ RUN steamcmd.sh +login $steam_username $steam_password \
 
 # We need access to i386 arch 32-bit binaries required by srcds_run
 USER root
-COPY debian/sources.list /etc/apt/sources.list
+COPY sources.list /etc/apt/sources.list
 RUN dpkg --add-architecture i386
 
 RUN apt-get update && apt-get upgrade -y --allow-unauthenticated

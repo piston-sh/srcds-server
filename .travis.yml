@@ -2,7 +2,22 @@ services:
   - docker
 
 script:
-  - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:debian-$TRAVIS_BUILD_NUMBER -t sourceforts/dedicated-server:debian -t sourceforts/dedicated-server:latest .
+  - pushd ubuntu-trusty
+  - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER .
+  - docker tag sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:ubuntu-trusty
+  - docker tag sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:ubuntu
+  - docker tag sourceforts/dedicated-server:ubuntu-trusty-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:latest
+  - popd
+  - pushd ubuntu-xenial
+  - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER .
+  - docker tag sourceforts/dedicated-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:ubuntu-xenial
+  - popd
+  - pushd debian-stretch
+  - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/dedicated-server:debian-stretch-$TRAVIS_BUILD_NUMBER .
+  - docker tag sourceforts/dedicated-server:debian-stretch-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:debian-stretch
+  - docker tag sourceforts/dedicated-server:debian-stretch-$TRAVIS_BUILD_NUMBER sourceforts/dedicated-server:debian
+  - popd
+
 
 before_deploy:
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
