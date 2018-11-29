@@ -45,6 +45,8 @@ RUN apt-get update && apt-get install -y \
     libopenal1:i386 \
     libfontconfig1:i386 \
     libfreetype6:i386 \
+    libxtables-dev:i386 \
+    libatm1:i386 \
     gdb && \
     apt-get -y upgrade && \
     apt-get clean autoclean && \
