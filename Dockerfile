@@ -30,7 +30,7 @@ USER root
 COPY debian/sources.list /etc/apt/sources.list
 RUN dpkg --add-architecture i386
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --allow-unauthenticated \
     software-properties-common \
     lib32tinfo5 \
     lib32ncurses5 \
