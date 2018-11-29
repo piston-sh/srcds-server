@@ -46,7 +46,7 @@ RUN apt-get install -y --allow-unauthenticated \
     libopenal1:i386 \
     libfontconfig1:i386 \
     libfreetype6:i386 \
-    libxtables-dev:i386 \
+    libxtables10:i386 \
     libatm1:i386 \
     gdb
     

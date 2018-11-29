@@ -27,6 +27,7 @@ RUN steamcmd.sh +login $steam_username $steam_password \
 
 # We need access to i386 arch 32-bit binaries required by srcds_run
 USER root
+COPY sources.list /etc/apt/sources.list
 RUN dpkg --add-architecture i386
 
 RUN apt-get update && apt-get upgrade -y --allow-unauthenticated
@@ -46,7 +47,7 @@ RUN apt-get install -y --allow-unauthenticated \
     libopenal1:i386 \
     libfontconfig1:i386 \
     libfreetype6:i386 \
-    libxtables-dev:i386 \
+    libxtables10:i386 \
     libatm1:i386 \
     gdb
     
