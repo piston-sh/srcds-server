@@ -25,6 +25,9 @@ RUN steamcmd.sh +login $steam_username $steam_password \
         +app_update 243750 validate \
         +quit
 
+# Link fix for some libraries
+RUN ln -s $STEAMCMD_DIR/linux32 $STEAM_HOME_DIR/.steam/sdk32
+
 # Expose ports
 EXPOSE 27005/udp
 EXPOSE 27015/tcp
