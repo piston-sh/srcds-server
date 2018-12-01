@@ -26,7 +26,7 @@ RUN steamcmd.sh +login $steam_username $steam_password \
         +quit
 
 # Link fix for some libraries
-RUN rm -f $STEAMCMD/linux32/*.so*
+RUN rm -f $STEAMCMD_DIR/linux32/*.so*
 RUN ln -s $STEAM_USER_DIR/bin $STEAM_USER_DIR/.steam/sdk32
 RUN ln -s $STEAM_USER_DIR/bin/* $STEAMCMD_DIR/linux32/
 
