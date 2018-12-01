@@ -26,9 +26,8 @@ RUN steamcmd.sh +login $steam_username $steam_password \
         +quit
 
 # Link fix for some libraries
-RUN ln -s $STEAMCMD_DIR/linux32 $STEAM_USER_DIR/.steam/sdk32
-RUN ln -s $STEAM_USER_DIR/bin $STEAM_USER_DIR/.steam/sdk32
-RUN ln -s $STEAM_USER_DIR/bin/steamclient.so $STEAMCMD_DIR/linux32/steamclient.so
+RUN ln -s $STEAM_USER_DIR/bin/* $STEAM_USER_DIR/.steam/sdk32/
+RUN ln -s $STEAM_USER_DIR/bin/* $STEAMCMD_DIR/linux32/
 
 # Expose ports
 EXPOSE 27005/udp
