@@ -1,4 +1,4 @@
-FROM sourceforts/steamcmd:ubuntu-xenial
+FROM pistonsh/steamcmd:ubuntu-xenial
 LABEL maintainer="denis@piston.sh"
 
 ARG steam_username 
