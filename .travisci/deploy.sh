@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ubuntu-xenial
-docker push sourceforts/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER
-docker push sourceforts/srcds-server:ubuntu-xenial
-docker push sourceforts/srcds-server:ubuntu
-docker push sourceforts/srcds-server:latest
+docker push pistonsh/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER
+docker push pistonsh/srcds-server:ubuntu-xenial
+docker push pistonsh/srcds-server:ubuntu
+docker push pistonsh/srcds-server:latest

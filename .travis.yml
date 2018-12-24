@@ -3,10 +3,10 @@ services:
 
 script:
   - pushd ubuntu-xenial
-  - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t sourceforts/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER .
-  - docker tag sourceforts/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER sourceforts/srcds-server:ubuntu-xenial
-  - docker tag sourceforts/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER sourceforts/srcds-server:ubuntu
-  - docker tag sourceforts/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER sourceforts/srcds-server:latest
+  - docker build --build-arg steam_username=$STEAM_USERNAME --build-arg steam_password=$STEAM_PASSWORD -t pistonsh/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER .
+  - docker tag pistonsh/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER pistonsh/srcds-server:ubuntu-xenial
+  - docker tag pistonsh/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER pistonsh/srcds-server:ubuntu
+  - docker tag pistonsh/srcds-server:ubuntu-xenial-$TRAVIS_BUILD_NUMBER pistonsh/srcds-server:latest
   - popd
 
 before_deploy:

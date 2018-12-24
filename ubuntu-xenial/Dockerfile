@@ -1,5 +1,5 @@
 FROM sourceforts/steamcmd:ubuntu-xenial
-LABEL maintainer="admin@deniscraig.com"
+LABEL maintainer="denis@piston.sh"
 
 ARG steam_username 
 ARG steam_password
